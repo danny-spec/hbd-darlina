@@ -299,6 +299,33 @@
 </div>  
 </div>
 
+<div class="col-12 text-center">
+    <div class="custom-card p-4" style="background: rgba(255, 112, 166, 0.05); border: 1px solid rgba(255, 112, 166, 0.3); border-radius: 18px;">
+        <h4 class="pink-text fw-bold mb-3"><i class="bi bi-controller me-2"></i>Quick Memory Check!</h4>
+        <p class="text-secondary small">Saan tayo madalas kumain o ano ang favorite memory natin?</p>
+        
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-3">
+            <button class="btn btn-outline-light btn-sm px-3" onclick="checkQuiz(false)">Pares?</button>
+            <button class="btn btn-outline-light btn-sm px-3" onclick="checkQuiz(true)">SamG? ✨</button>
+            <button class="btn btn-outline-light btn-sm px-3" onclick="checkQuiz(false)">Kila Sarah?</button>
+        </div>
+        <p id="quizResult" class="mt-3 fw-bold d-none text-pink"></p>
+    </div>
+</div>
+
+<script>
+function checkQuiz(isCorrect) {
+    const res = document.getElementById('quizResult');
+    res.classList.remove('d-none');
+    if (isCorrect) {
+        res.innerHTML = "Galing! Naalala mo pa pala haha 🎉";
+        launchConfetti();
+    } else {
+        res.innerHTML = "Mali! Subukan mo ulit 😜";
+    }
+}
+</script>
+
 <div class="position-fixed bottom-0 end-0 m-4 p-2 rounded-pill shadow" style="background: rgba(30, 30, 30, 0.9); border: 1px solid #ff70a6; z-index: 1000;">
     <button class="btn btn-sm text-white d-flex align-items-center gap-2" id="musicBtn" onclick="toggleMusic()">
         <i class="bi bi-disc fs-5 text-pink" id="musicIcon"></i>
