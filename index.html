@@ -65,8 +65,104 @@
             background-color: #ff477e;
             color: #ffffff;
         }
+
+        #countdownOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    z-index: 99999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.countdown-card {
+    background: rgba(25, 25, 25, 0.9);
+    border: 1px solid rgba(255, 112, 166, 0.4);
+    border-radius: 20px;
+    max-width: 450px;
+    width: 100%;
+}
+
+.timer-box {
+    background: rgba(255, 112, 166, 0.1);
+    border: 1px solid rgba(255, 112, 166, 0.3);
+    border-radius: 12px;
+    padding: 10px 14px;
+    min-width: 65px;
+}
+
+.timer-num {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff70a6;
+}
+
+.timer-label {
+    font-size: 0.75rem;
+    color: #aaa;
+    text-transform: uppercase;
+}
     </style>
 </head>
+
+    <div id="countdownOverlay" class="d-flex align-items-center justify-content-center text-center">
+    <div class="countdown-card p-4 mx-3 shadow-lg">
+        <h3 class="pink-text fw-bold mb-2"><i class="bi bi-clock-history me-2"></i>Counting Down...</h3>
+        <p class="text-light mb-4">May surpresang naghihintay para sa'yo sa September 5 ✨</p>
+        
+        <div class="d-flex justify-content-center gap-3 mb-3">
+            <div class="timer-box">
+                <span id="days" class="timer-num">00</span>
+                <span class="timer-label">Days</span>
+            </div>
+            <div class="timer-box">
+                <span id="hours" class="timer-num">00</span>
+                <span class="timer-label">Hours</span>
+            </div>
+            <div class="timer-box">
+                <span id="minutes" class="timer-num">00</span>
+                <span class="timer-label">Mins</span>
+            </div>
+            <div class="timer-box">
+                <span id="seconds" class="timer-num">00</span>
+                <span class="timer-label">Secs</span>
+            </div>
+        </div>
+
+        <p class="text-secondary small mb-0">Huwag munang sumilip, hintayin ang tamang oras 🎂</p>
+    </div>
+</div>
+
+    <script>
+        const targetBirthday = new Date("September 5, 2026 00:00:00").getTime();
+
+function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = targetBirthday - now;
+
+    // Kapag sumapit o lumagpas na ang Sept 5, 2026
+    if (distance <= 0) {
+        const overlay = document.getElementById('countdownOverlay');
+        if (overlay) {
+            overlay.style.transition = 'opacity 0.8s ease';
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 800);
+        }
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 *Para magkaroon ng countdown overlay na may blurred background at automatic na mawawala kapag sumapit na ang September 5, idagdag ang mga sumusunod na code:
+    </script>
 <body>
 
 <div class="header-box fixed-top shadow-sm" style="background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255, 112, 166, 0.2); z-index: 1020; padding: 15px 0;">
@@ -374,6 +470,35 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('touchstart', startAudioOnFirstClick);
     });
 });
+
+    const targetDate = new Date("September 5, 2026 00:00:00").getTime();
+
+const timerInterval = setInterval(function() {
+    const now = new Date().getTime();
+    const difference = targetDate - now;
+
+    if (difference <= 0) {
+        clearInterval(timerInterval);
+        const overlay = document.getElementById("countdownOverlay");
+        if (overlay) {
+            overlay.style.opacity = "0";
+            setTimeout(() => {
+                overlay.style.display = "none";
+            }, 600);
+        }
+        return;
+    }
+
+    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+    document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+    document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+    document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+}, 1000);
 </script>
 
 
