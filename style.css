@@ -1,8 +1,13 @@
 body {
-    background-color: #121212;
+    background-color: #0d0d11;
+    background-image: 
+        radial-gradient(circle at 15% 20%, rgba(255, 112, 166, 0.18) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(255, 71, 126, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(130, 40, 100, 0.12) 0%, transparent 60%);
     color: #e0e0e0;
     font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+    position: relative;
 }
 
 .stage-container {
@@ -80,4 +85,46 @@ body {
 
 .btn-sliding {
     animation: heartSlide 0.45s ease-in-out;
+}
+
+
+
+/* Dagdag na dynamic ambient glow sa background */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 112, 166, 0.08) 10%, transparent 50%);
+    animation: rotateGlow 18s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes rotateGlow {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Mas modernong glassmorphism para sa card */
+.custom-card {
+    background: rgba(26, 22, 28, 0.65) !important;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 112, 166, 0.25) !important;
+    border-radius: 24px;
+    padding: 25px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 112, 166, 0.12);
+    transition: 0.3s ease;
+}
+
+.custom-card:hover {
+    border-color: rgba(255, 112, 166, 0.5) !important;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 35px rgba(255, 112, 166, 0.2);
 }
